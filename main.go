@@ -6,19 +6,28 @@ import (
 	"time"
 )
 
+func init() {
+	fmt.Print("Performance measurement with make()")
+}
 func main() {
-	withOutMake()
+	// initialize()
+	// withMake()
 	withMake()
+	// withOutMake()
+}
+
+func initialize() {
+	var test int
+	sports := make([]string, 4, 6)
+	fmt.Print("Performance measurement with make()", test, sports)
 }
 func withMake() {
 	start := time.Now()
 	fmt.Println("Start time:", start)
-	sports := make([]string, 4, 15)
-	sports[0] = "Cricket"
-	sports[1] = "Football"
-	sports[2] = "Running"
-	sports[3] = "Badminton"
-	sports = append(sports, "Volleyball", "Swimming")
+	sports := make([]string, 8)
+	sports = []string{"Cricket", "Football", "Running", "Badminton", "Baseball", "Hockey"}
+	sports = append(sports, "Volleyball")
+	sports = append(sports, "Swimming")
 	fmt.Println("My favourite sports:")
 	for index, sport := range sports {
 		fmt.Printf("%d.\t%s\n", index+1, sport)
@@ -29,14 +38,15 @@ func withMake() {
 		fmt.Printf("%d.\t%s\n", index+1, sport)
 	}
 	elapsed := time.Since(start)
-	log.Printf("With make took %s", elapsed)
+	log.Printf("With make took %v", elapsed.Microseconds())
 
 }
 func withOutMake() {
 	start := time.Now()
 	fmt.Println("Start time:", start)
 	sports := []string{"Cricket", "Football", "Running", "Badminton"}
-	sports = append(sports, "Volleyball", "Swimming")
+	sports = append(sports, "Volleyball")
+	sports = append(sports, "Swimming")
 	fmt.Println("My favourite sports:")
 	for index, sport := range sports {
 		fmt.Printf("%d.\t%s\n", index+1, sport)
@@ -47,5 +57,5 @@ func withOutMake() {
 		fmt.Printf("%d.\t%s\n", index+1, sport)
 	}
 	elapsed := time.Since(start)
-	log.Printf("Without make took %s", elapsed)
+	log.Printf("Without make took %v", elapsed.Microseconds())
 }
